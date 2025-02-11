@@ -1,0 +1,16 @@
+@font-face {
+    font-family: 'SimHei';
+    src: url('/fonts/SimHei.woff2') format('woff2'),
+         url('/fonts/SimHei.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'PPEiko-Thin';
+    src: url('/fonts/PPEiko-Thin.otf') format('otf');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }

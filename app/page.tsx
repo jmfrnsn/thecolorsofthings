@@ -18,7 +18,7 @@ export default async function Home() {
           </div>
         )}
         {items.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 w-full">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 w-full">
             {items.map((item) => (
               <GridItem key={item.id} {...item} />
             ))}

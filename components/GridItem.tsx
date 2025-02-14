@@ -50,7 +50,7 @@ export function GridItem({ pixelatedSrc, unpixelatedSrc, alt, title }: GridItemT
           )}
         </div>
       </div>
-      <div className={`absolute bottom-6 left-0 right-0 pb-2 px-8 ${isClicked ? "block" : "hidden"}`}>
+      <div className={`absolute bottom-4 left-0 right-0 pb-2 px-8 ${isClicked ? "block" : "hidden"}`}>
         <h2
           className="text-center text-xs tracking-widest uppercase font-light text-[#BBB5AA]"
           style={{ fontFamily: "SimHei, sans-serif" }}

@@ -24,7 +24,7 @@ export default async function Home() {
             ))}
           </div>
         ) : (
-          <p className="text-center text-gray-500 mt-12">No images found in Blob storage.</p>
+          <p className="text-center text-gray-500 mt-100">No images found in Blob storage.</p>
         )}
       </main>
     </div>

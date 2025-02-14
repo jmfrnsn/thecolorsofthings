@@ -19,7 +19,7 @@ export function GridItem({ pixelatedSrc, unpixelatedSrc, alt, title }: GridItemT
       onClick={() => setIsClicked(!isClicked)}
     >
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="relative h-[75%] w-[75%] -mt-8">
+        <div className="relative h-[75%] w-[75%] -mt-6">
           {" "}
           {/* Update: Changed -mt-12 to -mt-16 */}
           {imageError ? (

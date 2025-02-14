@@ -18,7 +18,7 @@ export function GridItem({ pixelatedSrc, unpixelatedSrc, alt, title }: GridItemT
       className="relative aspect-square cursor-pointer bg-[#E5E3DF] ring-[0.5px] ring-[#C9C4BB] overflow-hidden"
       onClick={() => setIsClicked(!isClicked)}
     >
-      <div className="absolute inset-0 flex items-center justify-center p-4">
+      <div className="absolute inset-0 flex items-center justify-center">
         <div className="relative h-[75%] w-[75%] -mt-8">
           {" "}
           {/* Update: Changed -mt-12 to -mt-16 */}

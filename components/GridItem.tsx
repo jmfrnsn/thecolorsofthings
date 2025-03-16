@@ -1,14 +1,20 @@
 "use client"
 
 import Image from "next/image"
-import { useState, useCallback } from "react"
+import { useState, useCallback, useEffect } from "react"
 import type { GridItem as GridItemType } from "../app/types"
 import { useSound } from "../hooks/useSound"
 
 export function GridItem({ pixelatedSrc, unpixelatedSrc, alt, title }: GridItemType) {
   const [isClicked, setIsClicked] = useState(false)
   const [imageError, setImageError] = useState(false)
-  const { play } = useSound("/geiger-click.mp3")
+  const { play, isLoaded, loadError } = useSound("/geiger-click.mp3")
+
+  useEffect(() => {
+    if (loadError) {
+      console.error('Failed to load sound:', loadError)
+    }
+  }, [loadError])
 
   const handleImageError = (src: string) => {
     console.error(`Failed to load image: ${src}`)
@@ -16,17 +22,21 @@ export function GridItem({ pixelatedSrc, unpixelatedSrc, alt, title }: GridItemT
   }
 
   const handleClick = useCallback(async () => {
-    console.log('Image clicked')
+    console.log('Image clicked, sound loaded:', isLoaded)
     try {
-      await play()
-      console.log('Sound played, updating state')
+      if (isLoaded) {
+        await play()
+        console.log('Sound played, updating state')
+      } else {
+        console.log('Sound not loaded yet, updating state without sound')
+      }
       setIsClicked(prev => !prev)
     } catch (error) {
       console.error('Error in click handler:', error)
       // Still update the state even if sound fails
       setIsClicked(prev => !prev)
     }
-  }, [play])
+  }, [play, isLoaded])
 
   return (
     <div

@@ -4,12 +4,11 @@ import Image from "next/image"
 import { useState, useCallback, useEffect } from "react"
 import type { GridItem as GridItemType } from "../app/types"
 import { useSound } from "../hooks/useSound"
-import geigerClick from "../src/assets/geiger-click.mp3"
 
 export function GridItem({ pixelatedSrc, unpixelatedSrc, alt, title }: GridItemType) {
   const [isClicked, setIsClicked] = useState(false)
   const [imageError, setImageError] = useState(false)
-  const { play, isLoaded, loadError } = useSound(geigerClick)
+  const { play, isLoaded, loadError } = useSound("/geiger-click.mp3")
 
   useEffect(() => {
     if (loadError) {

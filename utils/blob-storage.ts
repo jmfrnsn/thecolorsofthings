@@ -19,6 +19,8 @@ export async function getGridItems(): Promise<GridItem[]> {
     const items: GridItem[] = []
     const seenTitles = new Set<string>()
 
+    const uploadDates = new Map<string, Date>()
+
     for (const blob of blobs) {
       if (blob.pathname.endsWith("-pixelated.png")) {
         const title = blob.pathname.replace("-pixelated.png", "")
@@ -33,6 +35,9 @@ export async function getGridItems(): Promise<GridItem[]> {
               pixelatedSrc: blob.url,
               unpixelatedSrc: unpixelatedBlob.url,
             })
+            const pixelatedDate = new Date(blob.uploadedAt)
+            const unpixelatedDate = new Date(unpixelatedBlob.uploadedAt)
+            uploadDates.set(title, new Date(Math.max(pixelatedDate.getTime(), unpixelatedDate.getTime())))
           }
         }
       }
@@ -40,11 +45,9 @@ export async function getGridItems(): Promise<GridItem[]> {
 
     console.log("Grid items created:", items.length)
     return items.sort((a, b) => {
-      if (a.title.toLowerCase().includes("lilies")) return -1
-      if (b.title.toLowerCase().includes("lilies")) return 1
-      if (a.title.toLowerCase().includes("butter")) return 1
-      if (b.title.toLowerCase().includes("butter")) return -1
-      return 0
+      const dateA = uploadDates.get(a.id) || new Date(0)
+      const dateB = uploadDates.get(b.id) || new Date(0)
+      return dateB.getTime() - dateA.getTime()
     })
   } catch (error) {
     console.error("Error fetching grid items:", error)

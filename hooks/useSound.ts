@@ -16,14 +16,32 @@ export function useSound(soundUrl: string) {
     }
 
     const handleError = (e: ErrorEvent) => {
-      const error = e.target as HTMLAudioElement
+      const mediaElement = e.target as HTMLAudioElement
+      const error = mediaElement.error
+      
+      // Get detailed error information
+      let errorDetails = 'Unknown error'
+      if (error) {
+        const errorCodes = {
+          1: 'MEDIA_ERR_ABORTED - The fetching of the audio file was aborted by the user.',
+          2: 'MEDIA_ERR_NETWORK - A network error occurred while fetching the audio file.',
+          3: 'MEDIA_ERR_DECODE - An error occurred while decoding the audio file.',
+          4: 'MEDIA_ERR_SRC_NOT_SUPPORTED - The audio file format is not supported.'
+        }
+        errorDetails = errorCodes[error.code as keyof typeof errorCodes] || `Unknown error code: ${error.code}`
+      }
+
       console.error('Audio loading error:', {
-        error: error.error,
-        networkState: error.networkState,
-        readyState: error.readyState,
-        src: error.src
+        errorCode: error?.code,
+        errorMessage: error?.message,
+        errorDetails,
+        networkState: mediaElement.networkState,
+        readyState: mediaElement.readyState,
+        currentSrc: mediaElement.currentSrc,
+        src: soundUrl
       })
-      setLoadError(`Failed to load audio: ${error.error}`)
+
+      setLoadError(`Failed to load audio: ${errorDetails}`)
       setIsLoaded(false)
     }
 
@@ -33,7 +51,19 @@ export function useSound(soundUrl: string) {
     // Set properties before setting src to ensure proper loading
     audio.preload = 'auto'
     audio.volume = 1.0
-    audio.src = soundUrl
+
+    // Test if the file exists before setting src
+    fetch(soundUrl)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`)
+        }
+        audio.src = soundUrl
+      })
+      .catch(error => {
+        console.error('Error fetching audio file:', error)
+        setLoadError(`Failed to fetch audio file: ${error.message}`)
+      })
     
     audioRef.current = audio
 

@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import { useState } from "react"
+import { useState, useCallback } from "react"
 import type { GridItem as GridItemType } from "../app/types"
 import { useSound } from "../hooks/useSound"
 
@@ -15,10 +15,18 @@ export function GridItem({ pixelatedSrc, unpixelatedSrc, alt, title }: GridItemT
     setImageError(true)
   }
 
-  const handleClick = () => {
-    setIsClicked(!isClicked)
-    play()
-  }
+  const handleClick = useCallback(async () => {
+    console.log('Image clicked')
+    try {
+      await play()
+      console.log('Sound played, updating state')
+      setIsClicked(prev => !prev)
+    } catch (error) {
+      console.error('Error in click handler:', error)
+      // Still update the state even if sound fails
+      setIsClicked(prev => !prev)
+    }
+  }, [play])
 
   return (
     <div

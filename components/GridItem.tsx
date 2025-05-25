@@ -75,7 +75,12 @@ export function GridItem({ pixelatedSrc, unpixelatedSrc, alt, title }: GridItemT
           )}
         </div>
       </div>
-      <div className={`absolute bottom-0 left-0 right-0 pb-6 px-8 transform transition-transform duration-300 "translate-y-0" : "translate-y-full"}`}>
+      <div className={`
+            absolute bottom-0 left-0 right-0 
+            pb-6 px-8
+            transform transition-transform ease-in-out duration-300
+            ${isClicked ? 'translate-y-full' : 'translate-y-0'}
+          `}>
         <h2
           className="text-center text-xs tracking-widest uppercase font-light text-[#BBB5AA]"
           style={{ fontFamily: "SimHei, sans-serif" }}

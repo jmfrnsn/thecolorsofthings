@@ -66,7 +66,7 @@ export function GridItem({ pixelatedSrc, unpixelatedSrc, alt, title }: GridItemT
                 src={unpixelatedSrc || "/placeholder.svg"}
                 alt={alt}
                 fill
-                className={`object-contain ${isClicked ? "opacity-100" : "opacity-100"}`}
+                className={`object-contain ${isClicked ? "opacity-0" : "opacity-100"}`}
                 sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 priority
                 onError={() => handleImageError(unpixelatedSrc)}
@@ -75,8 +75,7 @@ export function GridItem({ pixelatedSrc, unpixelatedSrc, alt, title }: GridItemT
           )}
         </div>
       </div>
-      <div className={`absolute bottom-0 left-0 right-0 pb-6 px-8 transform transition-transform duration-300 ${
-          isClicked ? "translate-y-0" : "translate-y-full"}`}>
+      <div className={`absolute bottom-0 left-0 right-0 pb-6 px-8 transform transition-transform duration-300 "translate-y-0" : "translate-y-full"}`}>
         <h2
           className="text-center text-xs tracking-widest uppercase font-light text-[#BBB5AA]"
           style={{ fontFamily: "SimHei, sans-serif" }}

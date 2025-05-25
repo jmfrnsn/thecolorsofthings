@@ -57,7 +57,7 @@ export function GridItem({ pixelatedSrc, unpixelatedSrc, alt, title }: GridItemT
                 src={pixelatedSrc || "/placeholder.svg"}
                 alt={`Pixelated ${alt}`}
                 fill
-                className={`object-contain ${isClicked ? "opacity-0" : "opacity-100"}`}
+                className={`object-contain ${isClicked ? "opacity-100" : "opacity-0"}`}
                 sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 priority
                 onError={() => handleImageError(pixelatedSrc)}
@@ -66,7 +66,7 @@ export function GridItem({ pixelatedSrc, unpixelatedSrc, alt, title }: GridItemT
                 src={unpixelatedSrc || "/placeholder.svg"}
                 alt={alt}
                 fill
-                className={`object-contain ${isClicked ? "opacity-100" : "opacity-0"}`}
+                className={`object-contain ${isClicked ? "opacity-100" : "opacity-100"}`}
                 sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 priority
                 onError={() => handleImageError(unpixelatedSrc)}
